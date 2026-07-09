@@ -101,7 +101,8 @@ const PROJECTS = [
     ],
     images: [
       "assets/projects/foodlens/star-schema.png",
-      "assets/projects/foodlens/summary-dashboard.png"
+      "assets/projects/foodlens/summary-dashboard.png",
+      "assets/projects/foodlens/inspection-validation-report.png"
     ]
   }
 ];
