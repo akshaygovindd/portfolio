@@ -73,7 +73,9 @@ const PROJECTS = [
       "Cross-validated 5 models on an 80/20 stratified split, tuning Random Forest via GridSearchCV to reach an F1 score of 0.9598 and ROC-AUC of 0.9547."
     ],
     decisions: [],
-    images: []
+    images: [
+      "assets/projects/wildfire/plot_06_class_imbalance.png"
+    ]
   },
   {
     id: "foodlens",
