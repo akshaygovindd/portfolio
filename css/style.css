@@ -296,6 +296,27 @@ nav.wrap{ display: flex; align-items: center; justify-content: space-between; he
 .about-copy{ display: flex; flex-direction: column; gap: 18px; max-width: 720px; }
 .about-copy p{ font-size: 15.5px; color: var(--text-muted); }
 
+.about-hobbies{ display: flex; gap: 14px; align-items: center; margin: -4px 0; }
+.hobby-icon{ animation: hobbyWobble 3.5s ease-in-out infinite; }
+.hobby-icon:nth-child(2){ animation: none; }
+@keyframes hobbyWobble{
+  0%, 100%{ transform: rotate(0deg); }
+  50%{ transform: rotate(-8deg); }
+}
+.steam{ opacity: 0; animation: steamRise 3s ease-in-out infinite; }
+.steam-1{ animation-delay: 0s; }
+.steam-2{ animation-delay: 1s; }
+@keyframes steamRise{
+  0%{ opacity: 0; transform: translateY(2px); }
+  30%{ opacity: 0.7; }
+  70%{ opacity: 0.4; }
+  100%{ opacity: 0; transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hobby-icon{ animation: none; }
+  .steam{ animation: none; opacity: 0.5; }
+}
+
 /* ---------- CONTACT ---------- */
 .contact{ border-bottom: none; }
 .contact-wrap{ display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 50px; }
