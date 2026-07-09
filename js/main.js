@@ -214,7 +214,7 @@ function scrambleReveal(el, finalText, { charDelay = 40, scrambleTime = 380, sta
 function initHeadlineScramble(){
   const h1 = document.querySelector('.hero-content h1');
   if(!h1 || prefersReducedMotion) return;
-  scrambleReveal(h1, h1.textContent.trim(), { charDelay: 25, scrambleTime: 200, stagger: 16 });
+  scrambleReveal(h1, h1.textContent.trim(), { charDelay: 32, scrambleTime: 290, stagger: 24 });
 }
 
 /* ---------- HERO SVG LINE CHART (3 layered trend lines) ---------- */
