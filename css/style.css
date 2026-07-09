@@ -430,16 +430,6 @@ footer p{ font-family: var(--font-mono); font-size: 11.5px; color: var(--text-fa
 .lightbox-close:hover{ border-color: var(--accent); color: var(--accent); }
 .modal-gallery .shot{ cursor: zoom-in; }
 
-/* ---------- PROJECT FILTER ---------- */
-.project-filter{ display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-.filter-btn{
-  font-family: var(--font-mono); font-size: 12.5px; padding: 8px 16px; border-radius: 999px;
-  border: 1px solid var(--border); color: var(--text-muted); transition: all 0.2s ease;
-}
-.filter-btn:hover{ border-color: var(--accent-dim); color: var(--text); }
-.filter-btn.active{ background: var(--accent); border-color: var(--accent); color: #05070a; }
-.project-card.filtered-out{ display: none; }
-
 /* ---------- PROJECT CARD THUMBNAIL ---------- */
 .proj-thumb{
   aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; margin-bottom: 18px;
@@ -453,7 +443,7 @@ footer p{ font-family: var(--font-mono); font-size: 11.5px; color: var(--text-fa
 /* ---------- PRINT ---------- */
 @media print{
   header, .hero-bg, .hero-grid-lines, .scroll-cue, .nav-toggle, .modal-overlay,
-  .lightbox-overlay, .skip-link, .project-filter{ display: none !important; }
+  .lightbox-overlay, .skip-link{ display: none !important; }
   *{ animation: none !important; transition: none !important; }
   .reveal{ opacity: 1 !important; transform: none !important; }
   body{ background: #fff; color: #111; }

@@ -88,8 +88,8 @@ function renderSkills(){
 function renderProjects(){
   const el = document.getElementById('project-grid');
   el.innerHTML = PROJECTS.map(p => `
-    <button class="project-card reveal" data-project="${p.id}" data-role="${p.role}" aria-haspopup="dialog">
-      ${p.images.length ? `<div class="proj-thumb"><img src="${p.images[0]}" alt="${altFromPath(p.images[0], p.name)}" loading="lazy"></div>` : ''}
+    <button class="project-card reveal" data-project="${p.id}" aria-haspopup="dialog">
+      ${p.id === 'instacart' && p.images.length ? `<div class="proj-thumb"><img src="${p.images[0]}" alt="${altFromPath(p.images[0], p.name)}" loading="lazy"></div>` : ''}
       <div class="proj-top">
         <div class="proj-title-row">
           <h3>${p.name}</h3>
@@ -112,27 +112,6 @@ function renderProjects(){
   });
 
   initCounters();
-}
-
-/* ---------- PROJECT FILTER ---------- */
-function initProjectFilter(){
-  const container = document.getElementById('project-filter');
-  if(!container) return;
-  const roles = ['All', 'Data Analyst', 'Data Engineer'];
-  container.innerHTML = roles.map((r, i) => `<button class="filter-btn${i === 0 ? ' active' : ''}" data-role="${r}">${r}</button>`).join('');
-
-  container.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const role = btn.dataset.role;
-      document.querySelectorAll('.project-card').forEach(card => {
-        const cardRole = card.dataset.role;
-        const match = role === 'All' || cardRole === role || cardRole === 'Both';
-        card.classList.toggle('filtered-out', !match);
-      });
-    });
-  });
 }
 
 /* ---------- RENDER: CONTACT ---------- */
@@ -427,5 +406,4 @@ initReveal();
 initHeadlineScramble();
 initHeroChart();
 initContactForm();
-initProjectFilter();
 initLightbox();
