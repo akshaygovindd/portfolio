@@ -61,32 +61,17 @@
           <circle class="scatter-dot" cx="980" cy="240" r="1.7" style="animation-delay:2.2s"/>
         </g>
 
-        <!-- trend lines, back to front -->
+        <!-- trend lines, back to front — straight angular segments, chart-style -->
         <path class="hero-line" id="hero-line-3"
-          d="M0,200 C150,180 250,260 400,220 C550,180 650,280 800,240 C950,200 1050,160 1200,140"
+          d="M0,210 L250,235 L520,190 L780,250 L1000,170 L1200,140"
           fill="none" stroke="#2dd496" stroke-width="1" opacity="0.14" />
         <path class="hero-line" id="hero-line-2"
-          d="M0,460 C60,440 110,470 160,450 C220,430 260,480 320,460 C380,440 420,380 480,400 C540,420 580,340 640,360 C700,380 760,300 820,320 C880,340 930,260 990,280 C1050,300 1100,240 1200,260"
+          d="M0,460 L150,445 L310,465 L460,400 L560,420 L700,350 L830,375 L960,300 L1080,320 L1200,260"
           fill="none" stroke="#2dd496" stroke-width="1.5" opacity="0.22" />
         <path class="hero-line" id="hero-line-1"
-          d="M0,400 C90,380 140,320 220,340 C300,360 340,240 420,260 C500,280 540,170 620,190 C700,210 760,140 840,120 C920,100 970,70 1040,55 L1200,30"
-          fill="none" stroke="#2dd496" stroke-width="2" opacity="0.4" />
-
-        <!-- mini bar cluster -->
-        <g class="hero-bars" fill="#2dd496">
-          <rect class="hero-bar" x="900" y="440" width="16" height="60"/>
-          <rect class="hero-bar" x="924" y="410" width="16" height="90"/>
-          <rect class="hero-bar" x="948" y="450" width="16" height="50"/>
-          <rect class="hero-bar" x="972" y="380" width="16" height="120"/>
-          <rect class="hero-bar" x="996" y="420" width="16" height="80"/>
-          <rect class="hero-bar" x="1020" y="360" width="16" height="140"/>
-          <rect class="hero-bar" x="1044" y="430" width="16" height="70"/>
-          <rect class="hero-bar" x="1068" y="390" width="16" height="110"/>
-          <rect class="hero-bar" x="1092" y="405" width="16" height="95"/>
-          <rect class="hero-bar" x="1116" y="370" width="16" height="130"/>
-          <rect class="hero-bar" x="1140" y="425" width="16" height="75"/>
-          <rect class="hero-bar" x="1164" y="395" width="16" height="105"/>
-        </g>
+          d="M0,410 L160,355 L290,385 L430,270 L570,300 L710,195 L860,150 L1010,90 L1200,28"
+          fill="none" stroke="#2dd496" stroke-width="2" opacity="0.5" />
+        <polygon class="hero-arrowhead" points="1200,28 1182,26 1188,41" fill="#2dd496" />
 
         <circle class="hero-dot" id="hero-dot-3" r="3" fill="#2dd496" opacity="0.5"/>
         <circle class="hero-dot" id="hero-dot-2" r="4" fill="#2dd496" opacity="0.7"/>

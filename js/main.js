@@ -214,7 +214,7 @@ function scrambleReveal(el, finalText, { charDelay = 40, scrambleTime = 380, sta
 function initHeadlineScramble(){
   const h1 = document.querySelector('.hero-content h1');
   if(!h1 || prefersReducedMotion) return;
-  scrambleReveal(h1, h1.textContent.trim());
+  scrambleReveal(h1, h1.textContent.trim(), { charDelay: 25, scrambleTime: 200, stagger: 16 });
 }
 
 /* ---------- HERO SVG LINE CHART (3 layered trend lines) ---------- */
@@ -226,7 +226,6 @@ function initHeroChart(){
   if(prefersReducedMotion){
     lines.forEach(l => { l.style.strokeDasharray = 'none'; });
     dots.forEach(d => { d.style.display = 'none'; });
-    document.querySelectorAll('.hero-bar').forEach(b => { b.style.opacity = '0.16'; b.style.transform = 'scaleY(1)'; });
     return;
   }
 
@@ -258,36 +257,6 @@ function initHeroChart(){
       requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
-  });
-
-  initHeroBars();
-}
-
-/* ---------- HERO MINI BAR CLUSTER ---------- */
-function initHeroBars(){
-  const bars = [...document.querySelectorAll('.hero-bar')];
-  bars.forEach((bar, i) => {
-    bar.style.opacity = '0.16';
-    const growIn = bar.animate(
-      [
-        { transform: 'scaleY(0)' },
-        { transform: 'scaleY(1.08)' },
-        { transform: 'scaleY(0.96)' },
-        { transform: 'scaleY(1)' }
-      ],
-      { duration: 650, delay: 700 + i * 55, easing: 'ease-out', fill: 'forwards' }
-    );
-    growIn.onfinish = () => {
-      bar.animate(
-        [
-          { transform: 'scaleY(1)' },
-          { transform: 'scaleY(1.05)' },
-          { transform: 'scaleY(0.97)' },
-          { transform: 'scaleY(1)' }
-        ],
-        { duration: 3200 + Math.random() * 2200, iterations: Infinity, easing: 'ease-in-out' }
-      );
-    };
   });
 }
 
