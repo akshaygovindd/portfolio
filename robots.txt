@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-alpha-eight-hu2j5tmewh.vercel.app/sitemap.xml

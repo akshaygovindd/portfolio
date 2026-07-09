@@ -15,6 +15,21 @@ const EXPERIENCE = [
   }
 ];
 
+const EDUCATION = [
+  {
+    school: "Northeastern University",
+    degree: "MS, Information Systems",
+    location: "Boston, MA",
+    date: "Sep 2025 – Dec 2027"
+  },
+  {
+    school: "University of Mumbai",
+    degree: "BE, Computer Engineering",
+    location: "Mumbai, India",
+    date: "Graduated May 2022"
+  }
+];
+
 const SKILLS = [
   {
     category: "Programming & Analysis",

@@ -11,11 +11,34 @@
 <meta property="og:title" content="Akshay Govind — Data Analyst & Data Engineer">
 <meta property="og:description" content="Data Analyst / Data Engineer. MS Information Systems @ Northeastern. Pipelines, dashboards, and models that hold up outside the notebook.">
 <meta property="og:url" content="https://portfolio-alpha-eight-hu2j5tmewh.vercel.app/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://portfolio-alpha-eight-hu2j5tmewh.vercel.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Akshay Govind — Data Analyst & Data Engineer">
 <meta name="twitter:description" content="Data Analyst / Data Engineer. MS Information Systems @ Northeastern.">
+<meta name="twitter:image" content="https://portfolio-alpha-eight-hu2j5tmewh.vercel.app/assets/og-image.png">
 
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0a0c0f">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Akshay Govind",
+  "jobTitle": "Data Analyst",
+  "url": "https://portfolio-alpha-eight-hu2j5tmewh.vercel.app/",
+  "email": "mailto:govind.ak@northeastern.edu",
+  "sameAs": [
+    "https://github.com/akshaygovindd",
+    "https://linkedin.com/in/akshaygovind06"
+  ],
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Northeastern University" },
+    { "@type": "CollegeOrUniversity", "name": "University of Mumbai" }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +46,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#home">Skip to content</a>
 
 <header>
   <nav class="wrap">
@@ -118,6 +142,7 @@
     <div class="wrap">
       <div class="eyebrow">// PROJECTS</div>
       <h2 class="sectiontitle reveal">Things I've built</h2>
+      <div class="project-filter" id="project-filter"></div>
       <div class="project-grid" id="project-grid"></div>
     </div>
   </section>
@@ -199,7 +224,14 @@
   <div class="modal-panel" id="modal-panel"></div>
 </div>
 
+<!-- IMAGE LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close image">×</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

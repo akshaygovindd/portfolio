@@ -2,20 +2,70 @@ document.documentElement.classList.add('js');
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- RENDER: EXPERIENCE ---------- */
+/* ---------- HELPERS: metric counters & image alt text ---------- */
+function renderMetric(text){
+  const match = text.match(/[\d,]+\.?\d+/);
+  if(!match) return `<span class="metric">${text}</span>`;
+  const numStr = match[0];
+  const prefix = text.slice(0, match.index);
+  const suffix = text.slice(match.index + numStr.length);
+  return `<span class="metric">${prefix}<span class="counter" data-target="${numStr}">0</span>${suffix}</span>`;
+}
+
+function animateCounter(el, duration = 1200){
+  const targetStr = el.dataset.target;
+  const target = parseFloat(targetStr.replace(/,/g, ''));
+  if(isNaN(target) || prefersReducedMotion){ el.textContent = targetStr; return; }
+  const decimals = targetStr.includes('.') ? targetStr.split('.')[1].length : 0;
+  const start = performance.now();
+  function step(ts){
+    const progress = Math.min((ts - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = target * eased;
+    el.textContent = decimals ? current.toFixed(decimals) : Math.round(current).toLocaleString();
+    if(progress < 1) requestAnimationFrame(step);
+    else el.textContent = targetStr;
+  }
+  requestAnimationFrame(step);
+}
+
+function initCounters(){
+  const counters = document.querySelectorAll('#project-grid .counter');
+  if(!counters.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        animateCounter(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => io.observe(c));
+}
+
+function altFromPath(path, projectName){
+  const filename = path.split('/').pop().replace(/\.[^.]+$/, '');
+  const label = filename.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  return `${projectName} — ${label}`;
+}
+
+/* ---------- RENDER: EXPERIENCE + EDUCATION (combined timeline) ---------- */
 function renderExperience(){
+  const timeline = [
+    { type: 'education', title: EDUCATION[0].degree, org: EDUCATION[0].school, location: EDUCATION[0].location, date: EDUCATION[0].date, bullets: [] },
+    ...EXPERIENCE.map(e => ({ type: 'work', ...e })),
+    { type: 'education', title: EDUCATION[1].degree, org: EDUCATION[1].school, location: EDUCATION[1].location, date: EDUCATION[1].date, bullets: [] }
+  ];
   const el = document.getElementById('experience-list');
-  el.innerHTML = EXPERIENCE.map(exp => `
+  el.innerHTML = timeline.map(item => `
     <div class="timeline-item reveal">
       <div class="exp-card">
         <div class="exp-head">
-          <h3>${exp.title}</h3>
-          <span class="date">${exp.date}</span>
+          <h3>${item.title}</h3>
+          <span class="date">${item.date}</span>
         </div>
-        <div class="exp-org">${exp.org} · ${exp.location}</div>
-        <ul class="exp-list">
-          ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
-        </ul>
+        <div class="exp-org">${item.org} · ${item.location} ${item.type === 'education' ? '<span class="role-badge">Education</span>' : ''}</div>
+        ${item.bullets.length ? `<ul class="exp-list">${item.bullets.map(b => `<li>${b}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   `).join('');
@@ -38,7 +88,8 @@ function renderSkills(){
 function renderProjects(){
   const el = document.getElementById('project-grid');
   el.innerHTML = PROJECTS.map(p => `
-    <button class="project-card reveal" data-project="${p.id}" aria-haspopup="dialog">
+    <button class="project-card reveal" data-project="${p.id}" data-role="${p.role}" aria-haspopup="dialog">
+      ${p.images.length ? `<div class="proj-thumb"><img src="${p.images[0]}" alt="${altFromPath(p.images[0], p.name)}" loading="lazy"></div>` : ''}
       <div class="proj-top">
         <div class="proj-title-row">
           <h3>${p.name}</h3>
@@ -51,13 +102,36 @@ function renderProjects(){
       </div>
       <p class="proj-desc">${p.shortDesc}</p>
       <div class="proj-metrics">
-        ${p.metrics.map(m => `<span class="metric">${m}</span>`).join('')}
+        ${p.metrics.map(renderMetric).join('')}
       </div>
     </button>
   `).join('');
 
   el.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('click', () => openModal(card.dataset.project));
+  });
+
+  initCounters();
+}
+
+/* ---------- PROJECT FILTER ---------- */
+function initProjectFilter(){
+  const container = document.getElementById('project-filter');
+  if(!container) return;
+  const roles = ['All', 'Data Analyst', 'Data Engineer'];
+  container.innerHTML = roles.map((r, i) => `<button class="filter-btn${i === 0 ? ' active' : ''}" data-role="${r}">${r}</button>`).join('');
+
+  container.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const role = btn.dataset.role;
+      document.querySelectorAll('.project-card').forEach(card => {
+        const cardRole = card.dataset.role;
+        const match = role === 'All' || cardRole === role || cardRole === 'Both';
+        card.classList.toggle('filtered-out', !match);
+      });
+    });
   });
 }
 
@@ -86,7 +160,7 @@ function openModal(projectId){
   if(!p) return;
 
   const gallery = p.images.length
-    ? p.images.map(src => `<div class="shot"><img src="${src}" alt="${p.name} screenshot" loading="lazy"></div>`).join('')
+    ? p.images.map(src => `<div class="shot"><img src="${src}" alt="${altFromPath(src, p.name)}" loading="lazy"></div>`).join('')
     : `<div class="shot">screenshot coming soon</div><div class="shot">screenshot coming soon</div>`;
 
   const decisions = p.decisions.length ? `
@@ -121,7 +195,7 @@ function openModal(projectId){
     </div>
     <div class="modal-stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
     <div class="modal-desc">${p.longDesc.map(par => `<p>${par}</p>`).join('')}</div>
-    <div class="modal-metrics">${p.metrics.map(m => `<span class="metric">${m}</span>`).join('')}</div>
+    <div class="modal-metrics">${p.metrics.map(renderMetric).join('')}</div>
     ${architecture}
     <div class="modal-section-title">Screenshots</div>
     <div class="modal-gallery">${gallery}</div>
@@ -134,6 +208,7 @@ function openModal(projectId){
   `;
 
   modalPanel.querySelector('.modal-close').addEventListener('click', closeModal);
+  modalPanel.querySelectorAll('.counter').forEach(c => animateCounter(c));
 
   lastFocusedEl = document.activeElement;
   modalOverlay.classList.add('open');
@@ -153,8 +228,51 @@ modalOverlay.addEventListener('click', (e) => {
   if(e.target === modalOverlay) closeModal();
 });
 document.addEventListener('keydown', (e) => {
-  if(e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+  const lightbox = document.getElementById('lightbox-overlay');
+  const lightboxOpen = lightbox && lightbox.classList.contains('open');
+  if(e.key === 'Escape' && modalOverlay.classList.contains('open') && !lightboxOpen) closeModal();
 });
+
+// Focus trap: keep Tab cycling inside the modal while it's open
+document.addEventListener('keydown', (e) => {
+  if(e.key !== 'Tab' || !modalOverlay.classList.contains('open')) return;
+  const focusable = modalPanel.querySelectorAll('button, a[href]');
+  if(!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if(e.shiftKey && document.activeElement === first){
+    e.preventDefault();
+    last.focus();
+  } else if(!e.shiftKey && document.activeElement === last){
+    e.preventDefault();
+    first.focus();
+  }
+});
+
+/* ---------- LIGHTBOX ---------- */
+function initLightbox(){
+  const overlay = document.getElementById('lightbox-overlay');
+  const img = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+  if(!overlay) return;
+
+  function openLightbox(src, alt){
+    img.src = src;
+    img.alt = alt;
+    overlay.classList.add('open');
+  }
+  function closeLightbox(){
+    overlay.classList.remove('open');
+  }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && overlay.classList.contains('open')) closeLightbox(); });
+  document.addEventListener('click', (e) => {
+    const shotImg = e.target.closest('.modal-gallery .shot img');
+    if(shotImg) openLightbox(shotImg.src, shotImg.alt);
+  });
+}
 
 /* ---------- NAV: mobile toggle + smooth scroll + active link ---------- */
 function initNav(){
@@ -309,3 +427,5 @@ initReveal();
 initHeadlineScramble();
 initHeroChart();
 initContactForm();
+initProjectFilter();
+initLightbox();

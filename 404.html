@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | Akshay Govind</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .notfound{
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px 24px;
+  }
+  .notfound .code{
+    font-family: var(--font-mono); font-size: 15px; color: var(--accent); letter-spacing: 0.1em;
+    margin-bottom: 18px; text-transform: uppercase;
+  }
+  .notfound h1{ font-size: clamp(32px, 6vw, 56px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .notfound p{ color: var(--text-muted); font-size: 16px; max-width: 440px; margin-bottom: 32px; }
+</style>
+</head>
+<body>
+  <div class="notfound">
+    <div class="code">// 404</div>
+    <h1>Query returned 0 rows</h1>
+    <p>This page doesn't exist — the record you're looking for isn't in this table.</p>
+    <a class="btn btn-primary" href="/">← Back to home</a>
+  </div>
+</body>
+</html>
