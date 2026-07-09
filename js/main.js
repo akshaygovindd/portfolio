@@ -217,39 +217,78 @@ function initHeadlineScramble(){
   scrambleReveal(h1, h1.textContent.trim());
 }
 
-/* ---------- HERO SVG LINE CHART ---------- */
+/* ---------- HERO SVG LINE CHART (3 layered trend lines) ---------- */
 function initHeroChart(){
-  const path = document.getElementById('hero-line');
-  const dot = document.getElementById('hero-dot');
-  if(!path || !dot) return;
-
-  const length = path.getTotalLength();
+  const lines = [...document.querySelectorAll('.hero-line')];
+  const dots = [...document.querySelectorAll('.hero-dot')];
+  if(!lines.length) return;
 
   if(prefersReducedMotion){
-    path.style.strokeDasharray = 'none';
-    dot.style.display = 'none';
+    lines.forEach(l => { l.style.strokeDasharray = 'none'; });
+    dots.forEach(d => { d.style.display = 'none'; });
+    document.querySelectorAll('.hero-bar').forEach(b => { b.style.opacity = '0.16'; b.style.transform = 'scaleY(1)'; });
     return;
   }
 
-  path.style.strokeDasharray = String(length);
-  path.style.strokeDashoffset = String(length);
-  path.animate(
-    [{ strokeDashoffset: length }, { strokeDashoffset: 0 }],
-    { duration: 1800, easing: 'ease-out', fill: 'forwards' }
-  );
+  // back line draws in first (slower reveal), front line last (snappier) —
+  // reads as the foreground trend "arriving" after the ambient depth layers.
+  const order = [2, 1, 0]; // indices into `lines`, back-to-front z order is 3,2,1 in the DOM already
+  lines.forEach((path, i) => {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = String(length);
+    path.style.strokeDashoffset = String(length);
+    const drawIndex = order.indexOf(i);
+    path.animate(
+      [{ strokeDashoffset: length }, { strokeDashoffset: 0 }],
+      { duration: 1400 + i * 300, delay: drawIndex * 250, easing: 'ease-out', fill: 'forwards' }
+    );
 
-  const loopDuration = 6000;
-  let start = null;
-  function step(ts){
-    if(start === null) start = ts;
-    const elapsed = (ts - start) % loopDuration;
-    const progress = elapsed / loopDuration;
-    const point = path.getPointAtLength(progress * length);
-    dot.setAttribute('cx', point.x);
-    dot.setAttribute('cy', point.y);
+    const dot = dots[i];
+    if(!dot) return;
+    const loopDuration = 4200 + i * 2600;
+    const phaseOffset = i * 700;
+    let start = null;
+    function step(ts){
+      if(start === null) start = ts - phaseOffset;
+      const elapsed = Math.max(0, ts - start) % loopDuration;
+      const progress = elapsed / loopDuration;
+      const point = path.getPointAtLength(progress * length);
+      dot.setAttribute('cx', point.x);
+      dot.setAttribute('cy', point.y);
+      requestAnimationFrame(step);
+    }
     requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
+  });
+
+  initHeroBars();
+}
+
+/* ---------- HERO MINI BAR CLUSTER ---------- */
+function initHeroBars(){
+  const bars = [...document.querySelectorAll('.hero-bar')];
+  bars.forEach((bar, i) => {
+    bar.style.opacity = '0.16';
+    const growIn = bar.animate(
+      [
+        { transform: 'scaleY(0)' },
+        { transform: 'scaleY(1.08)' },
+        { transform: 'scaleY(0.96)' },
+        { transform: 'scaleY(1)' }
+      ],
+      { duration: 650, delay: 700 + i * 55, easing: 'ease-out', fill: 'forwards' }
+    );
+    growIn.onfinish = () => {
+      bar.animate(
+        [
+          { transform: 'scaleY(1)' },
+          { transform: 'scaleY(1.05)' },
+          { transform: 'scaleY(0.97)' },
+          { transform: 'scaleY(1)' }
+        ],
+        { duration: 3200 + Math.random() * 2200, iterations: Infinity, easing: 'ease-in-out' }
+      );
+    };
+  });
 }
 
 /* ---------- CONTACT FORM (mailto, no backend) ---------- */

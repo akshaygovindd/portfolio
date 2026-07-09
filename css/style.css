@@ -128,6 +128,14 @@ nav.wrap{ display: flex; align-items: center; justify-content: space-between; he
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 18%, rgba(0,0,0,0.12) 38%, rgba(0,0,0,0.12) 64%, #000 84%, #000 100%);
 }
 .hero-bg svg{ width: 100%; height: 100%; }
+
+.hero-bar{ transform-box: fill-box; transform-origin: bottom; opacity: 0.16; }
+
+.scatter-dot{ animation: scatterPulse 4s ease-in-out infinite; }
+@keyframes scatterPulse{
+  0%, 100%{ opacity: 0.12; }
+  50%{ opacity: 0.5; }
+}
 .hero-grid-lines{
   position: absolute; inset: 0;
   background-image:
