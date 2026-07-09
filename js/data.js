@@ -45,8 +45,8 @@ const PROJECTS = [
     stack: ["PostgreSQL (Neon)", "Python", "Streamlit", "Plotly", "SQL", "RFM Analytics"],
     shortDesc: "Cloud-hosted PostgreSQL schema ingesting a 33M+ row benchmark grocery dataset, with RFM segmentation, cohort retention, and CLV tiering surfaced through a live Streamlit dashboard.",
     metrics: ["33M+ rows ingested", "RFM segmentation", "CLV tiering"],
-    github: "https://github.com/akshaygovindd",
-    demo: null,
+    github: "https://github.com/akshaygovindd/instacart-sql-analytics",
+    demo: "https://instacart-sql-dashboard.streamlit.app",
     // Longer paragraphs — replace with real README content once provided.
     longDesc: [
       "Architected a relational database schema using cloud-hosted PostgreSQL (Neon) to ingest a 33M+ row benchmark grocery dataset across core relational tables.",
@@ -65,7 +65,7 @@ const PROJECTS = [
     stack: ["Python", "Scikit-learn", "Pandas", "NumPy", "Random Forest", "SVM", "KNN"],
     shortDesc: "Binary classification framework on 1.88M USDA fire occurrence records predicting human vs. natural causes, tuned to F1 = 0.9598 despite a severe 5.2:1 class imbalance.",
     metrics: ["F1 = 0.9598", "ROC-AUC = 0.9547", "1.88M rows"],
-    github: "https://github.com/akshaygovindd",
+    github: "https://github.com/akshaygovindd/Wildfire-Cause-Prediction",
     demo: null,
     longDesc: [
       "Developed a binary classification framework on a 1.88M-row USDA Forest Service dataset to predict human vs. natural/lightning-caused wildfires.",
@@ -85,7 +85,7 @@ const PROJECTS = [
     stack: ["Databricks", "PySpark", "Delta Lake", "Unity Catalog", "SQL", "Power BI", "Kimball Star Schema"],
     shortDesc: "Bronze/Silver/Gold medallion pipeline processing 387,000+ inconsistent municipal food inspection records into a Kimball star schema with SCD Type 2 tracking.",
     metrics: ["387,000+ records", "Medallion architecture", "SCD Type 2"],
-    github: "https://github.com/akshaygovindd",
+    github: "https://github.com/akshaygovindd/FoodLens-Databricks-Pipeline",
     demo: null,
     longDesc: [
       "Engineered a Medallion architecture pipeline (Bronze/Silver/Gold) in Databricks to ingest 387,000+ structurally inconsistent municipal food inspection records.",
