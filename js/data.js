@@ -54,7 +54,10 @@ const PROJECTS = [
       "Optimized query performance using EXPLAIN ANALYZE and composite/partial indexes, then shipped an interactive Streamlit dashboard for exploring the results live."
     ],
     decisions: [],
-    images: []
+    images: [
+      "assets/projects/instacart/dashboard-home.png",
+      "assets/projects/instacart/overview-orders-by-department.png"
+    ]
   },
   {
     id: "wildfire",
