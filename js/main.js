@@ -183,6 +183,40 @@ function initReveal(){
   els.forEach(el => io.observe(el));
 }
 
+/* ---------- HERO HEADLINE SCRAMBLE-DECODE ---------- */
+function scrambleReveal(el, finalText, { charDelay = 40, scrambleTime = 380, stagger = 30 } = {}){
+  const glitchChars = "!<>-_\\/[]{}=+*^?#01";
+  el.setAttribute('aria-label', finalText);
+  el.innerHTML = finalText.split('').map(ch =>
+    `<span class="scramble-char" aria-hidden="true">${ch === ' ' ? '&nbsp;' : ch}</span>`
+  ).join('');
+
+  el.querySelectorAll('.scramble-char').forEach((span, i) => {
+    const target = finalText[i];
+    if(target === ' ') return;
+    setTimeout(() => {
+      let ticks = 0;
+      const maxTicks = Math.round(scrambleTime / charDelay);
+      const interval = setInterval(() => {
+        ticks++;
+        if(ticks >= maxTicks){
+          clearInterval(interval);
+          span.textContent = target;
+          span.classList.add('settled');
+        } else {
+          span.textContent = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        }
+      }, charDelay);
+    }, i * stagger);
+  });
+}
+
+function initHeadlineScramble(){
+  const h1 = document.querySelector('.hero-content h1');
+  if(!h1 || prefersReducedMotion) return;
+  scrambleReveal(h1, h1.textContent.trim());
+}
+
 /* ---------- HERO SVG LINE CHART ---------- */
 function initHeroChart(){
   const path = document.getElementById('hero-line');
@@ -239,5 +273,6 @@ renderProjects();
 renderContact();
 initNav();
 initReveal();
+initHeadlineScramble();
 initHeroChart();
 initContactForm();
