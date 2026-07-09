@@ -99,7 +99,10 @@ const PROJECTS = [
         detail: "Two source formats disagreed on field names, types, and granularity. PySpark transforms normalized both into a shared schema before they hit the Silver layer."
       }
     ],
-    images: []
+    images: [
+      "assets/projects/foodlens/star-schema.png",
+      "assets/projects/foodlens/summary-dashboard.png"
+    ]
   }
 ];
 
