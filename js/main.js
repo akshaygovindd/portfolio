@@ -156,7 +156,7 @@ function initNav(){
     });
   });
 
-  const sections = ['home','projects','experience','skills','contact']
+  const sections = ['home','projects','experience','skills','about','contact']
     .map(id => document.getElementById(id)).filter(Boolean);
   const navAnchors = document.querySelectorAll('.navlinks a');
   const io = new IntersectionObserver((entries) => {

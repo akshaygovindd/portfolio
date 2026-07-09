@@ -287,6 +287,10 @@ nav.wrap{ display: flex; align-items: center; justify-content: space-between; he
   background: var(--accent-soft); border: 1px solid var(--accent-dim); color: var(--accent);
 }
 
+/* ---------- ABOUT ---------- */
+.about-copy{ display: flex; flex-direction: column; gap: 18px; max-width: 720px; }
+.about-copy p{ font-size: 15.5px; color: var(--text-muted); }
+
 /* ---------- CONTACT ---------- */
 .contact{ border-bottom: none; }
 .contact-wrap{ display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 50px; }
