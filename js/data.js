@@ -75,7 +75,8 @@ const PROJECTS = [
     decisions: [],
     images: [
       "assets/projects/wildfire/plot_06_class_imbalance.png",
-      "assets/projects/wildfire/plot_02_geographic_analysis.png"
+      "assets/projects/wildfire/plot_02_geographic_analysis.png",
+      "assets/projects/wildfire/plot_12_baseline_model_comparison.png"
     ]
   },
   {
