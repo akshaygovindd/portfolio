@@ -17,24 +17,28 @@ const EXPERIENCE = [
 
 const SKILLS = [
   {
-    category: "Languages & Frameworks",
-    items: ["SQL", "PostgreSQL", "Oracle", "Python", "Pandas", "NumPy", "Scikit-learn", "PySpark"]
+    category: "Programming & Analysis",
+    items: ["Python", "Pandas", "NumPy", "Scikit-learn", "SQL"]
+  },
+  {
+    category: "Databases",
+    items: ["PostgreSQL", "Oracle"]
+  },
+  {
+    category: "Data Engineering",
+    items: ["Databricks", "PySpark", "Delta Lake", "Snowflake", "Azure Data Factory"]
+  },
+  {
+    category: "Visualization & BI",
+    items: ["Power BI", "Tableau", "Streamlit"]
   },
   {
     category: "Machine Learning & AI",
     items: ["Machine Learning", "Generative AI", "Large Language Models (LLMs)"]
   },
   {
-    category: "Data Engineering & Ops",
-    items: ["Databricks", "Delta Lake", "Git", "GitHub", "Jira"]
-  },
-  {
-    category: "Cloud & Warehousing",
-    items: ["Azure Data Factory", "Snowflake"]
-  },
-  {
-    category: "Analytics & Reporting",
-    items: ["Tableau", "Power BI", "Streamlit"]
+    category: "Tools & Workflow",
+    items: ["Git", "GitHub", "Jira"]
   }
 ];
 
@@ -42,6 +46,7 @@ const PROJECTS = [
   {
     id: "instacart",
     name: "Instacart Analytics Platform",
+    role: "Both",
     stack: ["PostgreSQL (Neon)", "Python", "Streamlit", "Plotly", "SQL", "RFM Analytics"],
     shortDesc: "Cloud-hosted PostgreSQL schema ingesting a 33M+ row benchmark grocery dataset, with RFM segmentation, cohort retention, and CLV tiering surfaced through a live Streamlit dashboard.",
     metrics: ["33M+ rows ingested", "RFM segmentation", "CLV tiering"],
@@ -53,15 +58,18 @@ const PROJECTS = [
       "Developed analytical scripts spanning window functions, stored procedures, and triggers to power RFM segmentation, cohort retention analysis, and CLV tiering.",
       "Optimized query performance using EXPLAIN ANALYZE and composite/partial indexes, then shipped an interactive Streamlit dashboard for exploring the results live."
     ],
+    architecture: ["Raw CSV Exports (3.4M orders)", "PostgreSQL (Neon)", "SQL Analytics Layer", "Streamlit Dashboard"],
     decisions: [],
     images: [
       "assets/projects/instacart/dashboard-home.png",
       "assets/projects/instacart/overview-orders-by-department.png"
-    ]
+    ],
+    githubStats: { commits: 24, language: "Python, PL/pgSQL", updated: "Apr 2026" }
   },
   {
     id: "wildfire",
     name: "Wildfire Cause Prediction",
+    role: "Data Analyst",
     stack: ["Python", "Scikit-learn", "Pandas", "NumPy", "Random Forest", "SVM", "KNN"],
     shortDesc: "Binary classification framework on 1.88M USDA fire occurrence records predicting human vs. natural causes, tuned to F1 = 0.9598 despite a severe 5.2:1 class imbalance.",
     metrics: ["F1 = 0.9598", "ROC-AUC = 0.9547", "1.88M rows"],
@@ -72,16 +80,19 @@ const PROJECTS = [
       "Engineered 5 spatial and temporal features, including drought indexing, to address a severe 5.2:1 class imbalance in the source data.",
       "Cross-validated 5 models on an 80/20 stratified split, tuning Random Forest via GridSearchCV to reach an F1 score of 0.9598 and ROC-AUC of 0.9547."
     ],
+    architecture: ["USDA Raw Data (1.88M rows)", "Feature Engineering", "Model Training & CV", "Tuned Random Forest (F1 = 0.9598)"],
     decisions: [],
     images: [
       "assets/projects/wildfire/plot_06_class_imbalance.png",
       "assets/projects/wildfire/plot_02_geographic_analysis.png",
       "assets/projects/wildfire/plot_12_baseline_model_comparison.png"
-    ]
+    ],
+    githubStats: { commits: 9, language: "Python (Jupyter Notebooks)", updated: "Apr 2026" }
   },
   {
     id: "foodlens",
     name: "FoodLens — Food Inspections ELT Pipeline",
+    role: "Data Engineer",
     stack: ["Databricks", "PySpark", "Delta Lake", "Unity Catalog", "SQL", "Power BI", "Kimball Star Schema"],
     shortDesc: "Bronze/Silver/Gold medallion pipeline processing 387,000+ inconsistent municipal food inspection records into a Kimball star schema with SCD Type 2 tracking.",
     metrics: ["387,000+ records", "Medallion architecture", "SCD Type 2"],
@@ -110,7 +121,8 @@ const PROJECTS = [
       "assets/projects/foodlens/star-schema.png",
       "assets/projects/foodlens/summary-dashboard.png",
       "assets/projects/foodlens/inspection-validation-report.png"
-    ]
+    ],
+    githubStats: { commits: 14, language: "Python (Jupyter Notebooks)", updated: "Apr 2026" }
   }
 ];
 

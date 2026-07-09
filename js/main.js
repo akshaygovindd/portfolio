@@ -40,7 +40,10 @@ function renderProjects(){
   el.innerHTML = PROJECTS.map(p => `
     <button class="project-card reveal" data-project="${p.id}" aria-haspopup="dialog">
       <div class="proj-top">
-        <h3>${p.name}</h3>
+        <div class="proj-title-row">
+          <h3>${p.name}</h3>
+          <span class="role-badge">${p.role}</span>
+        </div>
         <span class="proj-arrow">view details ↗</span>
       </div>
       <div class="proj-stack">
@@ -93,12 +96,33 @@ function openModal(projectId){
     </div>
   ` : '';
 
+  const architecture = p.architecture ? `
+    <div class="modal-section-title">Architecture</div>
+    <div class="modal-architecture">
+      ${p.architecture.map((stage, i) => `
+        <div class="arch-stage">${stage}</div>${i < p.architecture.length - 1 ? '<span class="arch-arrow">→</span>' : ''}
+      `).join('')}
+    </div>
+  ` : '';
+
+  const githubStats = p.githubStats ? `
+    <div class="modal-github-stats">
+      <span>${p.githubStats.commits} commits</span>
+      <span>${p.githubStats.language}</span>
+      <span>Updated ${p.githubStats.updated}</span>
+    </div>
+  ` : '';
+
   modalPanel.innerHTML = `
     <button class="modal-close" aria-label="Close project details">×</button>
-    <h2 class="modal-title">${p.name}</h2>
+    <div class="modal-title-row">
+      <h2 class="modal-title">${p.name}</h2>
+      <span class="role-badge">${p.role}</span>
+    </div>
     <div class="modal-stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
     <div class="modal-desc">${p.longDesc.map(par => `<p>${par}</p>`).join('')}</div>
     <div class="modal-metrics">${p.metrics.map(m => `<span class="metric">${m}</span>`).join('')}</div>
+    ${architecture}
     <div class="modal-section-title">Screenshots</div>
     <div class="modal-gallery">${gallery}</div>
     ${decisions}
@@ -106,6 +130,7 @@ function openModal(projectId){
       <a class="btn btn-ghost" href="${p.github}" target="_blank" rel="noopener">↗ View on GitHub</a>
       ${p.demo ? `<a class="btn btn-primary" href="${p.demo}" target="_blank" rel="noopener">↗ Live demo</a>` : ''}
     </div>
+    ${githubStats}
   `;
 
   modalPanel.querySelector('.modal-close').addEventListener('click', closeModal);
