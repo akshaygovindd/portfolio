@@ -382,6 +382,31 @@ function initHeroChart(){
   });
 }
 
+/* ---------- ABOUT VISUAL: messy data gets swept clean ---------- */
+function initAboutVisual(){
+  const panel = document.querySelector('.about-visual');
+  if(!panel) return;
+
+  if(prefersReducedMotion){
+    panel.classList.add('is-clean');
+    return;
+  }
+
+  panel.classList.add('no-transition', 'is-clean');
+  requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.remove('no-transition')));
+
+  function loop(){
+    setTimeout(() => {
+      panel.classList.remove('is-clean'); // -> messy
+      setTimeout(() => {
+        panel.classList.add('is-clean'); // -> clean
+        loop();
+      }, 1800);
+    }, 2600);
+  }
+  loop();
+}
+
 /* ---------- CONTACT FORM (mailto, no backend) ---------- */
 function initContactForm(){
   const form = document.getElementById('contact-form');
@@ -407,3 +432,4 @@ initHeadlineScramble();
 initHeroChart();
 initContactForm();
 initLightbox();
+initAboutVisual();
