@@ -185,19 +185,31 @@
           <span class="label-clean">// clean_data.csv</span>
         </div>
         <svg viewBox="0 0 260 260" class="about-visual-svg">
-          <rect x="0" y="0" width="260" height="260" rx="10" class="visual-bg"/>
-          <circle class="data-dot" cx="50" cy="60" r="5" style="--mx:-15px; --my:25px; transition-delay:.05s"/>
-          <circle class="data-dot" cx="105" cy="60" r="5" style="--mx:20px; --my:-20px; transition-delay:.18s"/>
-          <circle class="data-dot" cx="160" cy="60" r="5" style="--mx:-25px; --my:30px; transition-delay:.31s"/>
-          <circle class="data-dot" cx="215" cy="60" r="5" style="--mx:15px; --my:45px; transition-delay:.44s"/>
-          <circle class="data-dot" cx="50" cy="130" r="5" style="--mx:30px; --my:-25px; transition-delay:.1s"/>
-          <circle class="data-dot" cx="105" cy="130" r="5" style="--mx:-30px; --my:20px; transition-delay:.22s"/>
-          <circle class="data-dot" cx="160" cy="130" r="5" style="--mx:25px; --my:35px; transition-delay:.35s"/>
-          <circle class="data-dot" cx="215" cy="130" r="5" style="--mx:-20px; --my:-30px; transition-delay:.48s"/>
-          <circle class="data-dot" cx="50" cy="200" r="5" style="--mx:20px; --my:-35px; transition-delay:.14s"/>
-          <circle class="data-dot" cx="105" cy="200" r="5" style="--mx:-15px; --my:25px; transition-delay:.26s"/>
-          <circle class="data-dot" cx="160" cy="200" r="5" style="--mx:30px; --my:-20px; transition-delay:.39s"/>
-          <circle class="data-dot" cx="215" cy="200" r="5" style="--mx:-25px; --my:20px; transition-delay:.52s"/>
+          <rect x="0" y="0" width="260" height="260" rx="10" class="table-rail"/>
+          <rect x="16" y="16" width="228" height="228" rx="6" class="table-felt"/>
+          <circle class="pocket" cx="16" cy="16" r="7"/>
+          <circle class="pocket" cx="244" cy="16" r="7"/>
+          <circle class="pocket" cx="16" cy="244" r="7"/>
+          <circle class="pocket" cx="244" cy="244" r="7"/>
+          <circle class="pocket" cx="130" cy="16" r="6"/>
+          <circle class="pocket" cx="130" cy="244" r="6"/>
+
+          <!-- 10-ball rack, apex faces left toward the incoming cue ball -->
+          <circle class="data-dot" cx="85" cy="130" r="5" style="--mx:-45px; --my:-80px; --mo:.5; --ms:.9; transition-delay:.05s"/>
+          <circle class="data-dot" cx="111" cy="118" r="5" style="--mx:89px; --my:-78px; --mo:.7; --ms:1.1; transition-delay:.18s"/>
+          <circle class="data-dot" cx="111" cy="142" r="5" style="--mx:-51px; --my:-52px; --mo:.45; --ms:.85; transition-delay:.31s"/>
+          <circle class="data-dot" cx="137" cy="106" r="5" style="--mx:83px; --my:-26px; --mo:.8; --ms:1.05; transition-delay:.1s"/>
+          <circle class="data-dot" cx="137" cy="130" r="5" style="--mx:-107px; --my:20px; --mo:.55; --ms:.95; transition-delay:.22s"/>
+          <circle class="data-dot" cx="137" cy="154" r="5" style="--mx:13px; --my:-94px; --mo:.65; --ms:1.15; transition-delay:.35s"/>
+          <circle class="data-dot" cx="163" cy="94" r="5" style="--mx:27px; --my:76px; --mo:.4; --ms:.9; transition-delay:.14s"/>
+          <circle class="data-dot" cx="163" cy="118" r="5" style="--mx:-93px; --my:82px; --mo:.75; --ms:1.0; transition-delay:.26s"/>
+          <circle class="data-dot" cx="163" cy="142" r="5" style="--mx:47px; --my:78px; --mo:.5; --ms:1.1; transition-delay:.39s"/>
+          <circle class="data-dot" cx="163" cy="166" r="5" style="--mx:-33px; --my:24px; --mo:.6; --ms:.85; transition-delay:.48s"/>
+
+          <g class="cue-stick">
+            <line x1="-90" y1="130" x2="-28" y2="130" stroke="#8a7358" stroke-width="3" stroke-linecap="round"/>
+            <line x1="-32" y1="130" x2="-26" y2="130" stroke="#e8e2d5" stroke-width="3.5" stroke-linecap="round"/>
+          </g>
           <circle class="sweep-ball" cx="0" cy="130" r="9"/>
         </svg>
       </div>

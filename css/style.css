@@ -315,15 +315,18 @@ nav.wrap{ display: flex; align-items: center; justify-content: space-between; he
 .about-visual.is-clean .label-messy{ opacity: 0; }
 .about-visual.is-clean .label-clean{ opacity: 1; }
 
-.about-visual-svg{ width: 100%; height: auto; display: block; }
-.visual-bg{ fill: var(--bg-elevated); }
+.about-visual-svg{ width: 100%; height: auto; display: block; overflow: visible; }
+.table-rail{ fill: #141b1a; }
+.table-felt{ fill: #0c1917; }
+.pocket{ fill: #050807; }
 
 .data-dot{
   fill: var(--text-faint);
-  transform: translate(var(--mx), var(--my));
-  transition: transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1), fill 0.6s ease;
+  opacity: var(--mo, 1);
+  transform: translate(var(--mx), var(--my)) scale(var(--ms, 1));
+  transition: transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1), fill 0.6s ease, opacity 0.6s ease;
 }
-.about-visual.is-clean .data-dot{ fill: var(--accent); transform: translate(0, 0); }
+.about-visual.is-clean .data-dot{ fill: var(--accent); opacity: 1; transform: translate(0, 0) scale(1); }
 .about-visual.no-transition .data-dot{ transition: none; }
 
 .sweep-ball{
@@ -332,15 +335,26 @@ nav.wrap{ display: flex; align-items: center; justify-content: space-between; he
 }
 @keyframes ballSweep{
   0%{ transform: translateX(-20px); opacity: 0; }
-  6%{ opacity: 1; }
+  7%{ opacity: 1; }
   46%{ transform: translateX(300px); opacity: 1; }
   52%{ opacity: 0; }
   100%{ opacity: 0; transform: translateX(-20px); }
 }
 
+.cue-stick{ animation: cueStick 4.6s linear infinite; }
+@keyframes cueStick{
+  0%, 3%{ opacity: 0; transform: translateX(-40px); }
+  4%{ opacity: 1; transform: translateX(-40px); }
+  7%{ opacity: 1; transform: translateX(12px); }
+  9%{ opacity: 1; transform: translateX(4px); }
+  13%{ opacity: 0; transform: translateX(-15px); }
+  100%{ opacity: 0; transform: translateX(-40px); }
+}
+
 @media (prefers-reduced-motion: reduce){
   .data-dot{ transition: none; }
   .sweep-ball{ animation: none; opacity: 0; }
+  .cue-stick{ animation: none; opacity: 0; }
   .about-visual .label-clean{ opacity: 1; }
   .about-visual .label-messy{ opacity: 0; }
 }
